@@ -5,8 +5,8 @@
   "targets": {
     "demo2020-75757": {
       "hosting": {
-        "pwademo": [
-          "pwademo"
+        "pwademo-26": [
+          "pwademo-26"
         ]
       }
     }
