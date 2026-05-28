@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1779953275148,
+  "timestamp": 1779954127937,
   "index": "/pwademo/index.html",
   "assetGroups": [
     {
@@ -13,7 +13,7 @@
       "urls": [
         "/pwademo/favicon.ico",
         "/pwademo/index.html",
-        "/pwademo/main-5KYYE4O4.js",
+        "/pwademo/main-LHLO2YSG.js",
         "/pwademo/manifest.webmanifest",
         "/pwademo/styles-5INURTSO.css"
       ],
@@ -50,8 +50,8 @@
     "/pwademo/icons/icon-512x512.png": "1de182f76f7329dfa8f9fcdd1fdcdd695bea6a99",
     "/pwademo/icons/icon-72x72.png": "aa88a6096bd973be7f6d7a5489bfa6bc2463f8c4",
     "/pwademo/icons/icon-96x96.png": "7fb8f59c30ce2ff12c700321a0b39e14b3dc8f95",
-    "/pwademo/index.html": "08308528a8838dd7f8474c33fdb053199df44076",
-    "/pwademo/main-5KYYE4O4.js": "2206c54833e2ff1aea01cd06ef37bd0a904bf42b",
+    "/pwademo/index.html": "50c7f926506c01bfc4500f49f1d6c920b48a813b",
+    "/pwademo/main-LHLO2YSG.js": "2bd7f9b93b3a041fa1ea104c76ba64d26266fb22",
     "/pwademo/manifest.webmanifest": "f03061ba4f1422b647a1c99434f704ad3fb21176",
     "/pwademo/styles-5INURTSO.css": "da39a3ee5e6b4b0d3255bfef95601890afd80709"
   },
