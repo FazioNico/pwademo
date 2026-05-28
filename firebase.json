@@ -1,0 +1,17 @@
+{
+  "hosting": {
+    "target": "pwademo-26",
+    "public": "dist/PWADemo/browser",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ],
+    "rewrites": [
+      {
+        "source": "**",
+        "destination": "/index.html"
+      }
+    ]
+  }
+}
