@@ -1,6 +1,6 @@
 {
   "hosting": {
-    "target": "pwademo",
+    "target": "pwademo-26",
     "public": "dist/PWADemo/browser",
     "ignore": [
       "firebase.json",
