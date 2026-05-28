@@ -6,6 +6,9 @@ on:
   pull_request:
     branches: [ main ]
 
+permissions:
+  contents: write
+
 jobs:
   build:
 
@@ -16,16 +19,21 @@ jobs:
         node-version: [22.x]
 
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v4
     - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v1
+      uses: actions/setup-node@v4
       with:
         node-version: ${{ matrix.node-version }}
+        cache: npm
     - run: npm ci
-   # - run: npm test
-    - run: npm run deploy:github --if-present
-
+    # - run: npm test
+    # - name: Configure Git author for CI deploy commit
+    #   run: |
+    #     git config --global user.name "github-actions[bot]"
+    #     git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+    - if: github.event_name == 'push'
+      run: npm run deploy:github --if-present
       env:
         CI: true
-        # Deploy env
-        GITHUB_TOKEN: ${{ secrets.GH_TOKEN }} #
+        # Automatically provided by GitHub Actions for each workflow run.
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
