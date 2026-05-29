@@ -13,6 +13,17 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      # create environment file
+      - name: Create .env file
+        run: |
+          mkdir -p src/environments
+          cat <<'EOF' > src/environments/environment.ts
+          export const environment = {
+            name: 'production',
+            apiKey: '${{ secrets.API_KEY }}'
+          };
+          EOF
+
       - run: npm ci && npm run build
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:

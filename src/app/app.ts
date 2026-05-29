@@ -1,6 +1,8 @@
 import { Component, CUSTOM_ELEMENTS_SCHEMA, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import '@khmyznikov/pwa-install';
+import { environment } from '../environments/environment';
+
 @Component({
   selector: 'app-root',
   imports: [RouterOutlet],
@@ -10,4 +12,6 @@ import '@khmyznikov/pwa-install';
 })
 export class App {
   protected readonly title = signal('PWADemo');
+  protected readonly envName = signal<string>(environment.name);
+  protected readonly apiKey = signal<string>(environment.apiKey);
 }
