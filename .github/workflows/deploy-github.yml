@@ -63,10 +63,17 @@ jobs:
           sleep 1
         done
 
+        if ! curl -fsS http://127.0.0.1:4173 >/dev/null; then
+          echo "Lighthouse preview server did not start in time"
+          cat /tmp/lighthouse-server.log || true
+          exit 1
+        fi
+
         npx --yes lighthouse http://127.0.0.1:4173 \
           --only-categories=performance \
           --output=json \
           --output-path=./lighthouse-report.json \
+          --chrome-flags="--headless=new --no-sandbox --disable-gpu --disable-dev-shm-usage" \
           --quiet
 
         node <<'NODE' >> "$GITHUB_STEP_SUMMARY"
