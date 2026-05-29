@@ -20,6 +20,7 @@ jobs:
           cat <<'EOF' > src/environments/environment.ts
           export const environment = {
             name: 'production',
+            apikey: '${{ secrets.API_KEY }}'
           };
           EOF
 

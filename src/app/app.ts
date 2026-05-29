@@ -13,4 +13,5 @@ import { environment } from '../environments/environment';
 export class App {
   protected readonly title = signal('PWADemo');
   protected readonly envName = signal<string>(environment.name);
+  protected readonly apiKey = signal<string>(environment.apiKey);
 }
