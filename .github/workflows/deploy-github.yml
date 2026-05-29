@@ -25,6 +25,18 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
         cache: npm
+        
+    # create environment file
+    - name: Create .env file
+      run: |
+        mkdir -p src/environments
+        cat <<'EOF' > src/environments/environment.ts
+        export const environment = {
+          name: 'production',
+          apiKey: '${{ secrets.API_KEY }}'
+        };
+        EOF
+
     - run: npm ci
     # - run: npm test
     - name: Configure Git author for CI deploy commit
