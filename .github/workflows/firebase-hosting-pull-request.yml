@@ -16,9 +16,12 @@ jobs:
       # create environment file
       - name: Create .env file
         run: |
-          echo "export const environment = {
+          mkdir -p src/environments
+          cat <<'EOF' > src/environments/environment.ts
+          export const environment = {
             name: 'production',
-          };" > src/environments/environment.ts
+          };
+          EOF
 
       - run: npm ci && npm run build
       - uses: FirebaseExtended/action-hosting-deploy@v0
