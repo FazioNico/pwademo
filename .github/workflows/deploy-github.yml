@@ -38,6 +38,50 @@ jobs:
         EOF
 
     - run: npm ci
+    - name: Build app
+      run: npm run build
+    - name: Run Lighthouse performance check
+      run: |
+        set -euo pipefail
+
+        build_index=$(find dist -type f -name index.html -print -quit)
+        if [ -z "$build_index" ]; then
+          echo "No build output found under dist/"
+          exit 1
+        fi
+
+        build_dir=$(dirname "$build_index")
+
+        python3 -m http.server 4173 --directory "$build_dir" >/tmp/lighthouse-server.log 2>&1 &
+        server_pid=$!
+        trap 'kill "$server_pid"' EXIT
+
+        for _ in $(seq 1 30); do
+          if curl -fsS http://127.0.0.1:4173 >/dev/null; then
+            break
+          fi
+          sleep 1
+        done
+
+        npx --yes lighthouse http://127.0.0.1:4173 \
+          --only-categories=performance \
+          --output=json \
+          --output-path=./lighthouse-report.json \
+          --quiet
+
+        node <<'NODE' >> "$GITHUB_STEP_SUMMARY"
+        const report = require('./lighthouse-report.json');
+        const audits = report.audits;
+        const score = Math.round(report.categories.performance.score * 100);
+
+        console.log('### Lighthouse Performance');
+        console.log(`- Performance score: ${score}`);
+        console.log(`- First Contentful Paint: ${audits['first-contentful-paint'].displayValue}`);
+        console.log(`- Largest Contentful Paint: ${audits['largest-contentful-paint'].displayValue}`);
+        console.log(`- Total Blocking Time: ${audits['total-blocking-time'].displayValue}`);
+        console.log(`- Cumulative Layout Shift: ${audits['cumulative-layout-shift'].displayValue}`);
+        console.log(`- Speed Index: ${audits['speed-index'].displayValue}`);
+        NODE
     # - run: npm test
     - name: Configure Git author for CI deploy commit
       run: |
